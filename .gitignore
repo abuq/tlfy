@@ -1,0 +1,7 @@
+tags
+*.pyc
+*~
+*.py~
+*.swp
+*.db
+media/upload/

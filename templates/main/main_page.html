@@ -1,0 +1,16 @@
+田林县人民法院诉讼与非诉讼专题网<br>
+{% if site_start %}
+    <a href='create_users/' >Create users.</a><br>
+{% endif %}
+{% if logged_in %}
+您已登录,{{userp.get_name}}.<br>
+{% elif not logged_in %}
+	<form action="/userp/login/" method="POST">
+		{% csrf_token %}
+		<table>{{ form.as_table}}
+		</table>
+		<input type="submit" value="登陆">
+	</form><br>
+{% endif %}
+
+
