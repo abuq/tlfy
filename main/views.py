@@ -25,5 +25,4 @@ def main_page(request):
         userp = UserProfile.objects.get(id = 1)
     except:
         site_start = True
-
     return render_to_response('main/main_page.html', RequestContext(request, locals()))

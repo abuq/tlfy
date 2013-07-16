@@ -18,7 +18,7 @@ def create_users(request):
 
     return HttpResponseRedirect('/')
 
-def login(request):
+def log_in(request):
     user = request.user
     userp = None
     try:
@@ -38,13 +38,11 @@ def login(request):
 
             try:
                 user = authenticate(username = username, password = pwd)
-                print 'user = ' + str(user)
 
                 if not user:
                     error.append('用户名或密码不正确')
                 else:
                     login(request, user)
-                    print 'canada'
                     if request.session.test_cookie_worked():
                         request.session.delete_test_cookie()
                     request.session.set_expiry(2592000)
@@ -59,7 +57,7 @@ def login(request):
 
     return HttpResponseRedirect('/')
 
-def logout(request):
+def log_out(request):
     logout(request)
     return HttpResponseRedirect('/')
 
