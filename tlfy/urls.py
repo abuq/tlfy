@@ -1,8 +1,13 @@
 from django.conf.urls import patterns, include, url
+from os.path import dirname, join
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
+
+media = join(
+	dirname(dirname(__file__)), 'media'
+)
 
 urlpatterns = patterns('',
     # Examples:
@@ -19,4 +24,8 @@ urlpatterns = patterns('',
     url(r'^userp/login/$', 'user_profile.views.log_in'),
     url(r'^userp/logout/$', 'user_profile.views.log_out'),
     url(r'^create_users/$', 'user_profile.views.create_users'),
+    url(r'^create_news/$', 'news.views.create_news'),
+    url(r'^news/(?P<nid>\d+)/$', 'news.views.news_page'),
+    url(r'^news/all/$$', 'news.views.all_news'),
+	url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root':media}),
 )

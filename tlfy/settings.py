@@ -126,7 +126,9 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'user_profile',
+    'news',
     'main',
+    'lib_tlfy',
 )
 
 # A sample logging configuration. The only tangible logging

@@ -1,6 +1,6 @@
 田林县人民法院诉讼与非诉讼专题网<br>
 {% if site_start %}
-    <a href='create_users/' >Create users.</a><br>
+    <a href='create_users/' >创建初始用户</a><br>
 {% endif %}
 {% if logged_in %}
 您已登录,{{userp.get_name}}.<br>
@@ -12,5 +12,13 @@
 		<input type="submit" value="登陆">
 	</form><br>
 {% endif %}
-
+<br>
+本院新闻<br>
+{% if is_admin %}
+<a href='create_news/'>添加新闻</a>
+{% endif %}
+{% for n in news %}
+<li><a href='/news/{{n.get_id}}/'>{{n.get_title}}</a></li>
+{% endfor %}
+<a href='/news/all/'><更多></a><br>
 
