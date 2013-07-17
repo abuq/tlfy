@@ -1,0 +1,12 @@
+<div class="user-content">
+	<div class="group-apply-admin-label">写站内信</div>
+	<div class="group-create">
+		<form method="post" action="/message/write/">
+		    {% csrf_token %}
+		    <table>
+		        {{form.as_table}}
+		    </table>
+		    <input type="submit" class="btn-login" style="left:0%" value="发送">
+		</form>
+	</div>
+</div>

@@ -1,0 +1,20 @@
+<a href='/message/write/'>写信</a><br>
+已收到的站内信:<br>
+{% for m in msg%}
+    <li><a href='/message/{{ m.get_id }}/'>{{ m.get_title }}</a></li>
+{% endfor %}
+<div class="pagination">
+    <span class="step-links">
+        {% if msg.has_previous %}
+            <a href="?page={{ msg.previous_page_number }}">上一页</a>
+        {% endif %}
+
+        <span class="current">
+            {{ msg.number }} / {{ msg.paginator.num_pages }}
+        </span>
+
+        {% if msg.has_next %}
+            <a href="?page={{ msg.next_page_number }}">下一页</a>
+        {% endif %}
+    </span>
+</div>

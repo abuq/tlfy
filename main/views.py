@@ -26,7 +26,7 @@ def main_page(request):
 
     site_start = False
     try:
-        userp = UserProfile.objects.get(id = 1)
+        userpp = UserProfile.objects.get(id = 1)
     except:
         site_start = True
 

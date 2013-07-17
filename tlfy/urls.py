@@ -23,9 +23,17 @@ urlpatterns = patterns('',
     url(r'^$', 'main.views.main_page'),
     url(r'^userp/login/$', 'user_profile.views.log_in'),
     url(r'^userp/logout/$', 'user_profile.views.log_out'),
+
     url(r'^create_users/$', 'user_profile.views.create_users'),
     url(r'^create_news/$', 'news.views.create_news'),
     url(r'^news/(?P<nid>\d+)/$', 'news.views.news_page'),
     url(r'^news/all/$$', 'news.views.all_news'),
+
+    url(r'^message/write/$', 'message.views.write_page'),
+    url(r'^message/(?P<mid>\d+)/$', 'message.views.message_page'),
+    url(r'^message/inbox/$', 'message.views.inbox'),
+    #url(r'^message/set_read/(?P<mid>\d+)/$', 'message.views.set_read'),
+    #url(r'^message/delete/(?P<mid>\d+)/$', 'message.views.delete'),
+
 	url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root':media}),
 )
