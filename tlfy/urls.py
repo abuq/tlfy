@@ -27,7 +27,7 @@ urlpatterns = patterns('',
     url(r'^create_users/$', 'user_profile.views.create_users'),
     url(r'^create_news/$', 'news.views.create_news'),
     url(r'^news/(?P<nid>\d+)/$', 'news.views.news_page'),
-    url(r'^news/all/$$', 'news.views.all_news'),
+    url(r'^news/all/$', 'news.views.all_news'),
 
     url(r'^message/write/$', 'message.views.write_page'),
     url(r'^message/(?P<mid>\d+)/$', 'message.views.message_page'),
@@ -36,7 +36,10 @@ urlpatterns = patterns('',
     #url(r'^message/delete/(?P<mid>\d+)/$', 'message.views.delete'),
 
     url(r'^create_notice/$', 'notice.views.create_notice'),
-    url(r'^notice/all/$$', 'notice.views.all_notice'),
+    url(r'^notice/all/$', 'notice.views.all_notice'),
+
+    url(r'^create_doc_example/$', 'doc_example.views.create_doc_example'),
+    url(r'^doc_example/all/$', 'doc_example.views.all_doc_example'),
 
 	url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root':media}),
 )

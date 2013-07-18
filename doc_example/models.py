@@ -3,13 +3,10 @@ from django.db import models
 
 class DocExample(models.Model):
     title = models.CharField(max_length = 100)
-    doc_url = models.URLField()
+    doc = models.FileField(upload_to='doc_example/%Y/%m/%d')
 
     def _unicode_(self):
         return u'%s' % (self.name)
 
     def get_title(self):
         return self.title
-
-    def get_doc_url(self):
-        return self.doc_url
