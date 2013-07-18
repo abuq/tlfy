@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from user_profile.models import UserProfile
 from user_profile.forms import LoginForm
 from news.models import *
+from notice.models import *
 
 def main_page(request):
     logged_in = False
@@ -31,5 +32,6 @@ def main_page(request):
         site_start = True
 
     news = News.objects.all().order_by('-datetime')[0:6]
+    notice_new = Notice.objects.all().order_by('-datetime')[0]
 
     return render_to_response('main/main_page.html', RequestContext(request, locals()))

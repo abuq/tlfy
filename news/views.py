@@ -72,16 +72,14 @@ def news_page(request, nid):
 
 def all_news(request):
     anews = News.objects.all().order_by('-datetime')
-    paginator = Paginator(anews, 12) # Show 25 contacts per page
+    paginator = Paginator(anews, 12) 
 
     page = request.GET.get('page')
     try:
         anews_part = paginator.page(page)
     except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
         anews_part = paginator.page(1)
     except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
         anews_part = paginator.page(paginator.num_pages)
 
     return render_to_response('news/all_news.html',

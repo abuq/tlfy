@@ -35,5 +35,8 @@ urlpatterns = patterns('',
     #url(r'^message/set_read/(?P<mid>\d+)/$', 'message.views.set_read'),
     #url(r'^message/delete/(?P<mid>\d+)/$', 'message.views.delete'),
 
+    url(r'^create_notice/$', 'notice.views.create_notice'),
+    url(r'^notice/all/$$', 'notice.views.all_notice'),
+
 	url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root':media}),
 )

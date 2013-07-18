@@ -1,0 +1,18 @@
+{% for n in notice%}
+    <li>{{ n.get_content }} ({{ n.get_datetime }})</li><br>
+{% endfor %}
+<div class="pagination">
+    <span class="step-links">
+        {% if notice.has_previous %}
+            <a href="?page={{ notice.previous_page_number }}">上一页</a>
+        {% endif %}
+
+        <span class="current">
+            {{ notice.number }} / {{ notice.paginator.num_pages }}
+        </span>
+
+        {% if notice.has_next %}
+            <a href="?page={{ notice.next_page_number }}">下一页</a>
+        {% endif %}
+    </span>
+</div>

@@ -130,6 +130,8 @@ INSTALLED_APPS = (
     'main',
     'lib_tlfy',
     'message',
+    'notice',
+    'doc_example',
 )
 
 # A sample logging configuration. The only tangible logging

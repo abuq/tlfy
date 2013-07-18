@@ -16,10 +16,21 @@
 <br>
 本院新闻<br>
 {% if is_admin %}
-<a href='create_news/'>添加新闻</a>
+<a href='create_news/'>添加新闻</a><br>
 {% endif %}
 {% for n in news %}
 <li><a href='/news/{{n.get_id}}/'>{{n.get_title}}</a></li>
 {% endfor %}
 <a href='/news/all/'><更多></a><br>
+<br>
+公告栏<br>
+{% if is_admin %}
+<a href='create_notice/'>添加公告</a><br>
+{% endif %}
+{% if logged_in %}
+{{ notice_new.get_content }}({{ notice_new.get_datetime }})<br>
+<a href='/notice/all/'><更多></a><br>
+{% else %}
+登录后方可查看
+{% endif %}
 
