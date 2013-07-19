@@ -1,5 +1,5 @@
 {% for d in doc_example%}
-    <li>{{ d.get_title }}.<a href=''>下载</a></li>
+    <li>{{ d.get_title }}.<a href='/media/{{ d.doc.url }}'>下载</a></li>
 {% endfor %}
 <div class="pagination">
     <span class="step-links">

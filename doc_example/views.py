@@ -5,6 +5,9 @@ from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from doc_example.models import *
 from doc_example.forms import *
+from user_profile.models import UserProfile
+from doc_example.models import DocExample
+from doc_example.forms import *
 import datetime
 
 def create_doc_example(request):
@@ -15,10 +18,8 @@ def create_doc_example(request):
     except:
         pass
     if not userp:
-        print 'apple'
         return HttpResponseRedirect('/')
     if not userp.is_admin():
-        print 'banana'
         return HttpResponseRedirect('/')
 
     error = list()
@@ -26,10 +27,10 @@ def create_doc_example(request):
         form = DocExampleForm(request.POST, request.FILES)
         if form.is_valid():
             title = form.cleaned_data['title']
-            docfile = Document(docfile = request.FILES['docfile'])
+            docfile = request.FILES['docfile']
 
             if len(error) == 0:
-                doc_example = DocExample.objects.create(title = title, doc =
+                doc_example = DocExample.objects.create(title = title, doc =\
                         docfile)
                 doc_example.save()
                 return HttpResponseRedirect('/')

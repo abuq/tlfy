@@ -7,6 +7,7 @@ from user_profile.models import UserProfile
 from user_profile.forms import LoginForm
 from news.models import *
 from notice.models import *
+from doc_example.models import *
 
 def main_page(request):
     logged_in = False
@@ -32,6 +33,10 @@ def main_page(request):
         site_start = True
 
     news = News.objects.all().order_by('-datetime')[0:6]
-    notice_new = Notice.objects.all().order_by('-datetime')[0]
+    try:
+        notice_new = Notice.objects.all().order_by('-datetime')[0]
+    except:
+        pass
+    doc_example = DocExample.objects.all()[0:5]
 
     return render_to_response('main/main_page.html', RequestContext(request, locals()))

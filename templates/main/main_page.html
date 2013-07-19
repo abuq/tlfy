@@ -40,9 +40,9 @@
 {% endif %}
 {% if logged_in %}
     {% for d in doc_example %}
-        {{ d.get_title }}.<a href='{{ d.doc.url }}'>下载</a><br>
+        {{ d.get_title }}.<a href='/media/{{ d.doc.url }}'>下载</a><br>
     {% endfor %}
-<a href='/doc_example/all/'></a><br>
+<a href='/doc_example/all/'><更多></a><br>
 {% else %}
 登录后方可查看<br>
 {% endif %}
