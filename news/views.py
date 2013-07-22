@@ -39,39 +39,101 @@ def create_news(request):
     return render_to_response('news/create_news.html',
             RequestContext(request, locals()))
 
-def news_page(request, nid):
-    news = News.objects.get(id = int(nid))
+def create_intro(request):
+    user = request.user
+    userp = None
+    try:
+        userp = UserProfile.objects.get(user = user)
+    except:
+        pass
+    if not userp:
+        return HttpResponseRedirect('/')
+    if not userp.is_admin():
+        return HttpResponseRedirect('/')
 
+    error = list()
     if request.method == 'POST':
-        form = PictureForm(request.POST)
+        form = NewsForm(request.POST)
         if form.is_valid():
-            if 'file' in request.FILES:
-                file = request.FILES['file']
-                path = '%s%s%s%s' % (upload_root, 'news/picture/', news.get_id(),
-                        file.name)
-                print 'path=' + path
-                dest = open(path, 'wb+')
-                
-                for chunk in file.chunks():
-                    dest.write(chunk)
-                dest.close()
-                print news.picture
-                print news.get_id()
-                print file.name
-                news.picture = '%s%d%s&&' % (news.picture, news.get_id(), file.name)
+            title = form.cleaned_data['title']
+            content = form.cleaned_data['content']
+
+            if len(error) == 0:
+                news = News.objects.create(title = title, content = content,
+                        datetime = datetime.datetime.now(), type = 1)
                 news.save()
+                return HttpResponseRedirect('/')
+
     else:
-        form = PictureForm()
+        form = NewsForm()
 
-    picture = news.get_picture()
-    
-    print 'picture=' + str(picture)
+    return render_to_response('intro/create_intro.html',
+            RequestContext(request, locals()))
 
-    return render_to_response('news/news_page.html',
+def create_law(request):
+    user = request.user
+    userp = None
+    try:
+        userp = UserProfile.objects.get(user = user)
+    except:
+        pass
+    if not userp:
+        return HttpResponseRedirect('/')
+    if not userp.is_admin():
+        return HttpResponseRedirect('/')
+
+    error = list()
+    if request.method == 'POST':
+        form = NewsForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            content = form.cleaned_data['content']
+
+            if len(error) == 0:
+                news = News.objects.create(title = title, content = content,
+                        datetime = datetime.datetime.now(), type = 2)
+                news.save()
+                return HttpResponseRedirect('/')
+
+    else:
+        form = NewsForm()
+
+    return render_to_response('law/create_law.html',
+            RequestContext(request, locals()))
+
+def create_train(request):
+    user = request.user
+    userp = None
+    try:
+        userp = UserProfile.objects.get(user = user)
+    except:
+        pass
+    if not userp:
+        return HttpResponseRedirect('/')
+    if not userp.is_admin():
+        return HttpResponseRedirect('/')
+
+    error = list()
+    if request.method == 'POST':
+        form = NewsForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            content = form.cleaned_data['content']
+
+            if len(error) == 0:
+                news = News.objects.create(title = title, content = content,
+                        datetime = datetime.datetime.now(), type = 3)
+                news.save()
+                return HttpResponseRedirect('/')
+
+    else:
+        form = NewsForm()
+
+    return render_to_response('train/create_train.html',
             RequestContext(request, locals()))
 
 def all_news(request):
-    anews = News.objects.all().order_by('-datetime')
+    anews = News.objects.all().filter(type = 0).order_by('-datetime')
     paginator = Paginator(anews, 12) 
 
     page = request.GET.get('page')
@@ -83,5 +145,88 @@ def all_news(request):
         anews_part = paginator.page(paginator.num_pages)
 
     return render_to_response('news/all_news.html',
+            RequestContext(request, locals()))
+
+def all_intro(request):
+    aintro = News.objects.all().filter(type = 1).order_by('-datetime')
+    paginator = Paginator(aintro, 12) 
+
+    page = request.GET.get('page')
+    try:
+        intro = paginator.page(page)
+    except PageNotAnInteger:
+        intro = paginator.page(1)
+    except EmptyPage:
+        intro = paginator.page(paginator.num_pages)
+
+    return render_to_response('intro/all_intro.html',
+            RequestContext(request, locals()))
+
+def all_law(request):
+    alaw = News.objects.all().filter(type = 2).order_by('-datetime')
+    paginator = Paginator(alaw, 12) 
+
+    page = request.GET.get('page')
+    try:
+        law = paginator.page(page)
+    except PageNotAnInteger:
+        law = paginator.page(1)
+    except EmptyPage:
+        law = paginator.page(paginator.num_pages)
+
+    return render_to_response('law/all_law.html',
+            RequestContext(request, locals()))
+
+def all_train(request):
+    atrain = News.objects.all().filter(type = 3).order_by('-datetime')
+    paginator = Paginator(atrain, 12) 
+
+    page = request.GET.get('page')
+    try:
+        train = paginator.page(page)
+    except PageNotAnInteger:
+        train = paginator.page(1)
+    except EmptyPage:
+        train = paginator.page(paginator.num_pages)
+
+    return render_to_response('train/all_train.html',
+            RequestContext(request, locals()))
+
+def news_page(request, nid):
+    is_admin = False
+
+    user = request.user
+    userp = None
+    try:
+        userp = UserProfile.objects.get(user = user)
+    except:
+        pass
+    if not userp:
+        pass
+    else:
+        if userp.is_admin():
+            is_admin = True
+
+    news = News.objects.get(id = int(nid))
+
+    if request.method == 'POST':
+        form = PictureForm(request.POST)
+        if form.is_valid():
+            if 'file' in request.FILES:
+                file = request.FILES['file']
+                path = '%s%s%s%s' % (upload_root, 'news/picture/', news.get_id(),
+                        file.name)
+                dest = open(path, 'wb+')
+                
+                for chunk in file.chunks():
+                    dest.write(chunk)
+                dest.close()
+                news.picture = '%s%d%s&&' % (news.picture, news.get_id(), file.name)
+                news.save()
+    else:
+        form = PictureForm()
+
+    picture = news.get_picture()
+    return render_to_response('news/news_page.html',
             RequestContext(request, locals()))
 

@@ -14,6 +14,15 @@
 	</form><br>
 {% endif %}
 <br>
+本院简介<br>
+{% if is_admin %}
+<a href='create_intro/'>添加简介</a><br>
+{% endif %}
+{% for i in intro %}
+<li><a href='/news/{{i.get_id}}/'>{{i.get_title}}</a></li>
+{% endfor %}
+<a href='/intro/all/'><更多></a><br>
+<br>
 本院新闻<br>
 {% if is_admin %}
 <a href='create_news/'>添加新闻</a><br>
@@ -22,6 +31,24 @@
 <li><a href='/news/{{n.get_id}}/'>{{n.get_title}}</a></li>
 {% endfor %}
 <a href='/news/all/'><更多></a><br>
+<br>
+法律法规<br>
+{% if is_admin %}
+<a href='create_law/'>添加法律法规</a><br>
+{% endif %}
+{% for l in law %}
+<li><a href='/news/{{l.get_id}}/'>{{l.get_title}}</a></li>
+{% endfor %}
+<a href='/law/all/'><更多></a><br>
+<br>
+业务培训<br>
+{% if is_admin %}
+<a href='create_train/'>添加培训</a><br>
+{% endif %}
+{% for t in train %}
+<li><a href='/news/{{t.get_id}}/'>{{t.get_title}}</a></li>
+{% endfor %}
+<a href='/train/all/'><更多></a><br>
 <br>
 公告栏<br>
 {% if is_admin %}

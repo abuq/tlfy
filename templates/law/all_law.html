@@ -1,0 +1,18 @@
+{% for l in law%}
+    <li><a href='/news/{{ l.get_id }}/'>{{ l.get_title }}</a></li>
+{% endfor %}
+<div class="pagination">
+    <span class="step-links">
+        {% if law.has_previous %}
+            <a href="?page={{ law.previous_page_number }}">上一页</a>
+        {% endif %}
+
+        <span class="current">
+            {{ law.number }} / {{ law.paginator.num_pages }}
+        </span>
+
+        {% if law.has_next %}
+            <a href="?page={{ law.next_page_number }}">下一页</a>
+        {% endif %}
+    </span>
+</div>

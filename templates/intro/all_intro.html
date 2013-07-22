@@ -1,0 +1,18 @@
+{% for i in intro %}
+    <li><a href='/news/{{ i.get_id }}/'>{{ i.get_title }}</a></li>
+{% endfor %}
+<div class="pagination">
+    <span class="step-links">
+        {% if intro.has_previous %}
+            <a href="?page={{ intro.previous_page_number }}">上一页</a>
+        {% endif %}
+
+        <span class="current">
+            {{ intro.number }} / {{ intro.paginator.num_pages }}
+        </span>
+
+        {% if intro.has_next %}
+            <a href="?page={{ intro.next_page_number }}">下一页</a>
+        {% endif %}
+    </span>
+</div>

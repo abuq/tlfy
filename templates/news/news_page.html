@@ -1,11 +1,13 @@
 {{ news.get_title }}<br>
 {{ news.get_datetime }}<br><br>
+{% if is_admin %}
 <form enctype="multipart/form-data" action="/news/{{ news.get_id }}/" method="POST">
     {% csrf_token %}
     <table>{{ form.as_table}}
     </table>
     <input type="submit" value="上传图片">
 </form><br>
+{% endif %}
 {{ news.get_content }}<br>
 {% for p in picture %}
     <div><img src='{{ p }}'></div>

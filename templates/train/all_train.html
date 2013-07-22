@@ -1,0 +1,18 @@
+{% for t in train%}
+    <li><a href='/news/{{ t.get_id }}/'>{{ t.get_title }}</a></li>
+{% endfor %}
+<div class="pagination">
+    <span class="step-links">
+        {% if train.has_previous %}
+            <a href="?page={{ train.previous_page_number }}">上一页</a>
+        {% endif %}
+
+        <span class="current">
+            {{ train.number }} / {{ train.paginator.num_pages }}
+        </span>
+
+        {% if train.has_next %}
+            <a href="?page={{ train.next_page_number }}">下一页</a>
+        {% endif %}
+    </span>
+</div>

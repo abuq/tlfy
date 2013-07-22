@@ -3,6 +3,8 @@ from django.db import models
 from user_profile.models import UserProfile
 
 class News(models.Model):
+    #0:news.1:intro.2:law.3:train.
+    type = models.IntegerField(default = 0)
     title = models.CharField(max_length = 100)
     content = models.TextField()
     datetime = models.DateTimeField()
@@ -10,6 +12,9 @@ class News(models.Model):
 
     def __unicode__(self):
         return u'%s' % (self.title)
+
+    def get_type(self):
+        return self.type
         
     def get_id(self):
         return self.id
