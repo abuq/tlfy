@@ -1,0 +1,11 @@
+{% extends "base.html" %} 
+
+{% block main %}
+<div class="main">
+	<div id="header">
+		{% include "main/header.html" %}
+	</div>
+    {% block content %}{% endblock %}
+	<div id="footer">{% include "base/footer.html"%}</div>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+<div><img src='/media/pic/pic_header'></div>
+田林县人民法院诉讼与非诉讼专题网(替换为主题图片)<br>
+{% if site_start %}
+    <a href='create_users/' >创建初始用户</a><br>
+{% endif %}
+{% if logged_in %}
+您已登录,{{ userp.get_name }}.<a href='/userp/logout/'>退出登录</a><br>
+<a href='/message/inbox/'>进入站内信箱</a><br>
+{% elif not logged_in %}
+	<form action="/userp/login/" method="POST">
+		{% csrf_token %}
+		<table>{{ form.as_table}}
+		</table>
+		<input type="submit" value="登陆">
+	</form><br>
+{% endif %}
+
+{% include "base/nav.html" %}
