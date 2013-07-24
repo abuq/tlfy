@@ -43,3 +43,4 @@ def main_page(request):
     doc_example = DocExample.objects.all()[0:5]
 
     return render_to_response('main/main_page.html', RequestContext(request, locals()))
+

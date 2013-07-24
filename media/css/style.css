@@ -266,6 +266,28 @@ body {
     margin-bottom: 8px;
 }
 
+.pic_header {
+    height:100%;
+    width:100%;
+    float:left;
+    position:relative;
+}
+
+#login_info {
+    width:100%;
+    position:relative;
+    float:left;
+    margin-top:-20px;
+    z-index:1;
+}
+
+.main_grid {
+    width:50%;
+    height:100%;
+    float:left;
+    position:relative;
+}
+
 .header_info {
 	height:64px;
 	padding-left:78%;
@@ -376,8 +398,10 @@ input[type="text"],input[type="password"] {
 }
 
 #header {
-	height: 100px;
+	height: 100%;
 	width: 100%;
+    position: relative;
+    float: left;
 }
 
 #content {

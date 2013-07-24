@@ -1,5 +1,7 @@
 {% extends "main/base.html" %}
 {% block content %}
+<div>
+<div class='main_grid'>
 本院简介<br>
 {% if is_admin %}
 <a href='create_intro/'>添加简介</a><br>
@@ -8,7 +10,8 @@
 <li><a href='/news/{{i.get_id}}/'>{{i.get_title}}</a></li>
 {% endfor %}
 <a href='/intro/all/'><更多></a><br>
-<br>
+</div>
+<div class='main_grid'>
 本院新闻<br>
 {% if is_admin %}
 <a href='create_news/'>添加新闻</a><br>
@@ -17,7 +20,8 @@
 <li><a href='/news/{{n.get_id}}/'>{{n.get_title}}</a></li>
 {% endfor %}
 <a href='/news/all/'><更多></a><br>
-<br>
+</div>
+<div class='main_grid'>
 法律法规<br>
 {% if is_admin %}
 <a href='create_law/'>添加法律法规</a><br>
@@ -26,7 +30,8 @@
 <li><a href='/news/{{l.get_id}}/'>{{l.get_title}}</a></li>
 {% endfor %}
 <a href='/law/all/'><更多></a><br>
-<br>
+</div>
+<div class='main_grid'>
 业务培训<br>
 {% if is_admin %}
 <a href='create_train/'>添加培训</a><br>
@@ -35,7 +40,8 @@
 <li><a href='/news/{{t.get_id}}/'>{{t.get_title}}</a></li>
 {% endfor %}
 <a href='/train/all/'><更多></a><br>
-<br>
+</div>
+<div class='main_grid'>
 公告栏<br>
 {% if is_admin %}
 <a href='create_notice/'>添加公告</a><br>
@@ -46,7 +52,8 @@
 {% else %}
 登录后方可查看<br>
 {% endif %}
-<br>
+</div>
+<div class='main_grid'>
 文书样式<br>
 {% if is_admin %}
 <a href='/create_doc_example/'>添加文书样式</a><br>
@@ -59,4 +66,6 @@
 {% else %}
 登录后方可查看<br>
 {% endif %}
+</div>
+</div>
 {% endblock %}

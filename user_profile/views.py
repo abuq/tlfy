@@ -68,7 +68,7 @@ def log_in(request):
     else:
         form = LoginForm()
 
-    return HttpResponseRedirect('/')
+    return render_to_response('userp/login.html', RequestContext(request, locals()))
 
 def log_out(request):
     logout(request)

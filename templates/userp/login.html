@@ -1,0 +1,6 @@
+<form action="/userp/login/" method="POST">
+    {% csrf_token %}
+    <table>{{ form.as_table}}
+    </table>
+    <input type="submit" value="登录">
+</form><br>
