@@ -32,10 +32,10 @@ def main_page(request):
     except:
         site_start = True
 
-    news = News.objects.all().filter(type = 0).order_by('-datetime')[0:6]
-    intro = News.objects.all().filter(type = 1).order_by('-datetime')[0:6]
-    law = News.objects.all().filter(type = 2).order_by('-datetime')[0:6]
-    train = News.objects.all().filter(type = 3).order_by('-datetime')[0:6]
+    news = News.objects.all().filter(type = 0).order_by('-datetime')[0:9]
+    intro = News.objects.all().filter(type = 1).order_by('-datetime')[0:9]
+    law = News.objects.all().filter(type = 2).order_by('-datetime')[0:9]
+    train = News.objects.all().filter(type = 3).order_by('-datetime')[0:9]
     try:
         notice_new = Notice.objects.all().order_by('-datetime')[0]
     except:

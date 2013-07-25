@@ -1,70 +1,84 @@
 {% extends "main/base.html" %}
 {% block content %}
-<div>
+<div class='main_grid_outline'>
 <div class='main_grid'>
-本院简介<br>
+<div class='main_grid_title'>本院简介
 {% if is_admin %}
-<a href='create_intro/'>添加简介</a><br>
+<a href='create_intro/'>添加简介</a>
 {% endif %}
+<div class='main_grid_more'><a href='/intro/all/'>更多>></a></div>
+</div>
 {% for i in intro %}
-<li><a href='/news/{{i.get_id}}/'>{{i.get_title}}</a></li>
+<div class='main_grid_content'><a href='/news/{{i.get_id}}/'>{{i.get_title}}</a>
+<div class='main_grid_datetime'>{{ i.get_datetime|date:'Y-m-d' }}</div>
+</div>
 {% endfor %}
-<a href='/intro/all/'><更多></a><br>
 </div>
 <div class='main_grid'>
-本院新闻<br>
+<div class='main_grid_title'>本院新闻
 {% if is_admin %}
-<a href='create_news/'>添加新闻</a><br>
+<a href='create_news/'>添加新闻</a>
 {% endif %}
+<div class='main_grid_more'><a href='/news/all/'>更多>></a></div>
+</div>
 {% for n in news %}
-<li><a href='/news/{{n.get_id}}/'>{{n.get_title}}</a></li>
+<div class='main_grid_content'><a href='/news/{{n.get_id}}/'>{{n.get_title}}</a>
+<div class='main_grid_datetime'>{{ n.get_datetime|date:'Y-m-d' }}</div>
+</div>
 {% endfor %}
-<a href='/news/all/'><更多></a><br>
 </div>
 <div class='main_grid'>
-法律法规<br>
+<div class='main_grid_title'>法律法规
 {% if is_admin %}
-<a href='create_law/'>添加法律法规</a><br>
+<a href='create_law/'>添加法律</a>
 {% endif %}
+<div class='main_grid_more'><a href='/law/all/'>更多>></a></div>
+</div>
 {% for l in law %}
-<li><a href='/news/{{l.get_id}}/'>{{l.get_title}}</a></li>
+<div class='main_grid_content'><a href='/news/{{ l.get_id }}/'>{{l.get_title}}</a>
+<div class='main_grid_datetime'>{{ l.get_datetime|date:'Y-m-d' }}</div>
+</div>
 {% endfor %}
-<a href='/law/all/'><更多></a><br>
 </div>
 <div class='main_grid'>
-业务培训<br>
+<div class='main_grid_title'>业务培训
 {% if is_admin %}
-<a href='create_train/'>添加培训</a><br>
+<a href='create_law/'>添加培训</a>
 {% endif %}
+<div class='main_grid_more'><a href='/train/all/'>更多>></a></div>
+</div>
 {% for t in train %}
-<li><a href='/news/{{t.get_id}}/'>{{t.get_title}}</a></li>
+<div class='main_grid_content'><a href='/news/{{ t.get_id }}/'>{{t.get_title}}</a>
+<div class='main_grid_datetime'>{{ t.get_datetime|date:'Y-m-d' }}</div>
+</div>
 {% endfor %}
-<a href='/train/all/'><更多></a><br>
 </div>
 <div class='main_grid'>
-公告栏<br>
+<div class='main_grid_title'>公告栏
 {% if is_admin %}
-<a href='create_notice/'>添加公告</a><br>
+<a href='create_notice/'>添加公告</a>
 {% endif %}
+<div class='main_grid_more'><a href='/notice/all/'>更多>></a></div>
+</div>
 {% if logged_in %}
-{{ notice_new.get_content }}({{ notice_new.get_datetime }})<br>
-<a href='/notice/all/'><更多></a><br>
+{{ notice_new.get_content }}({{ notice_new.get_datetime|date:'Y-m-d' }})
 {% else %}
-登录后方可查看<br>
+登录后方可查看
 {% endif %}
 </div>
 <div class='main_grid'>
-文书样式<br>
+<div class='main_grid_title'>文书样式
 {% if is_admin %}
-<a href='/create_doc_example/'>添加文书样式</a><br>
+<a href='/create_doc_example/'>添加文书样式</a>
 {% endif %}
+<div class='main_grid_more'><a href='/doc_example/all/'>更多>></a></div>
+</div>
 {% if logged_in %}
     {% for d in doc_example %}
-        {{ d.get_title }}.<a href='/media/{{ d.doc.url }}'>下载</a><br>
+        <div class='main_grid_content'>{{ d.get_title }}.<a href='/media/{{ d.doc.url }}'>下载</a></div>
     {% endfor %}
-<a href='/doc_example/all/'><更多></a><br>
 {% else %}
-登录后方可查看<br>
+登录后方可查看
 {% endif %}
 </div>
 </div>
