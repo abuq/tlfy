@@ -1,5 +1,11 @@
+{% extends "main/base.html" %}
+{% block content %}
+<div class='news-page-outline'>
 {% for l in law%}
-    <li><a href='/news/{{ l.get_id }}/'>{{ l.get_title }}</a></li>
+<div class='all-news-iterm'>
+    <div class='all-news-iterm-title'><a href='/news/{{ l.get_id }}/'>{{ l.get_title }}</a></div>
+    <div class='all-news-iterm-datetime'>{{ l.get_datetime|date:'Y-m-d' }}</div>
+</div>
 {% endfor %}
 <div class="pagination">
     <span class="step-links">
@@ -16,3 +22,5 @@
         {% endif %}
     </span>
 </div>
+</div>
+{% endblock %}

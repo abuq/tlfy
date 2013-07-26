@@ -39,6 +39,8 @@ def create_notice(request):
     return render_to_response('notice/create_notice.html', RequestContext(request, locals()))
 
 def all_notice(request):
+    logged_in = False
+
     user = request.user
     userp = None
     try:
@@ -47,6 +49,8 @@ def all_notice(request):
         pass
     if not userp:
         return HttpResponseRedirect('/')
+    else:
+        logged_in = True
 
     notice_all = Notice.objects.all().order_by('-datetime')
     paginator = Paginator(notice_all, 10)

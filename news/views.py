@@ -133,6 +133,18 @@ def create_train(request):
             RequestContext(request, locals()))
 
 def all_news(request):
+    logged_in = False
+    user = request.user
+    userp = None
+    try:
+        userp = UserProfile.objects.get(user = user)
+    except:
+        pass
+    if not userp:
+        pass
+    else:
+        logged_in = True
+
     anews = News.objects.all().filter(type = 0).order_by('-datetime')
     paginator = Paginator(anews, 12) 
 
@@ -148,6 +160,18 @@ def all_news(request):
             RequestContext(request, locals()))
 
 def all_intro(request):
+    logged_in = False
+    user = request.user
+    userp = None
+    try:
+        userp = UserProfile.objects.get(user = user)
+    except:
+        pass
+    if not userp:
+        pass
+    else:
+        logged_in = True
+
     aintro = News.objects.all().filter(type = 1).order_by('-datetime')
     paginator = Paginator(aintro, 12) 
 
@@ -163,6 +187,18 @@ def all_intro(request):
             RequestContext(request, locals()))
 
 def all_law(request):
+    logged_in = False
+    user = request.user
+    userp = None
+    try:
+        userp = UserProfile.objects.get(user = user)
+    except:
+        pass
+    if not userp:
+        pass
+    else:
+        logged_in = True
+
     alaw = News.objects.all().filter(type = 2).order_by('-datetime')
     paginator = Paginator(alaw, 12) 
 
@@ -178,6 +214,18 @@ def all_law(request):
             RequestContext(request, locals()))
 
 def all_train(request):
+    logged_in = False
+    user = request.user
+    userp = None
+    try:
+        userp = UserProfile.objects.get(user = user)
+    except:
+        pass
+    if not userp:
+        pass
+    else:
+        logged_in = True
+
     atrain = News.objects.all().filter(type = 3).order_by('-datetime')
     paginator = Paginator(atrain, 12) 
 
@@ -193,6 +241,7 @@ def all_train(request):
             RequestContext(request, locals()))
 
 def news_page(request, nid):
+    logged_in = False
     is_admin = False
 
     user = request.user
@@ -204,6 +253,7 @@ def news_page(request, nid):
     if not userp:
         pass
     else:
+        logged_in = True
         if userp.is_admin():
             is_admin = True
 

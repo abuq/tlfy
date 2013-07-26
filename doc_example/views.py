@@ -42,6 +42,8 @@ def create_doc_example(request):
             RequestContext(request, locals()))
 
 def all_doc_example(request):
+    logged_in = False
+
     user = request.user
     userp = None
     try:
@@ -50,6 +52,8 @@ def all_doc_example(request):
         pass
     if not userp:
         return HttpResponseRedirect('/')
+    else:
+        logged_in = True
 
     all_doc_example = DocExample.objects.all()
     paginator = Paginator(all_doc_example, 10) 

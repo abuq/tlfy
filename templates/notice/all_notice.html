@@ -1,5 +1,8 @@
+{% extends "main/base.html" %}
+{% block content %}
+<div class='news-page-outline'>
 {% for n in notice%}
-    <li>{{ n.get_content }} ({{ n.get_datetime }})</li><br>
+    <li>{{ n.get_content }} ({{ n.get_datetime|date:'Y-m-d' }})</li><br>
 {% endfor %}
 <div class="pagination">
     <span class="step-links">
@@ -16,3 +19,5 @@
         {% endif %}
     </span>
 </div>
+</div>
+{% endblock %}

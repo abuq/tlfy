@@ -35,6 +35,8 @@ def write_page(request):
                 locals()))
 
 def inbox(request):    
+    logged_in = False;
+
     user = request.user
     userp = None
     try:
@@ -42,7 +44,9 @@ def inbox(request):
     except:
         pass
     if not userp:
-        return HttpResponseRedirect('/accounts/login')
+        return HttpResponseRedirect('/')
+    else:
+        logged_in = True
 
     msg_all = userp.received_msg.all()
     paginator = Paginator(msg_all, 10);

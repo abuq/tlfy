@@ -1,12 +1,12 @@
 <div class='pic-header'><img src='/media/pic/pic_header.png' width='960'>
 <div id='login_info'>
 {% if site_start %}
-    <a href='create_users/' >创建初始用户</a>
+    <a href='/create_users/' >创建初始用户</a>
 {% endif %}
 {% if logged_in %}
 您已登录,{{ userp.get_name }}.<a href='/userp/logout/'>退出登录</a>
 {% elif not logged_in %}
-    <a href='userp/login/'>登录</a>
+    <a href='/userp/login/'>登录</a>
 {% endif %}
 </div>
 </div>

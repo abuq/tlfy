@@ -1,3 +1,6 @@
+{% extends "main/base.html" %}
+{% block content %}
+<div class='news-page-outline'>
 {% for d in doc_example%}
     <li>{{ d.get_title }}.<a href='/media/{{ d.doc.url }}'>下载</a></li>
 {% endfor %}
@@ -16,3 +19,5 @@
         {% endif %}
     </span>
 </div>
+</div>
+{% endblock %}

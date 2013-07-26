@@ -1,14 +1,21 @@
-{{ news.get_title }}<br>
-{{ news.get_datetime }}<br><br>
+{% extends 'main/base.html' %}
+{% block content %}
+<div class='news-page-outline'>
+<div class='news-page-title'>{{ news.get_title }}</div>
+<div class='news-page-datetime'>{{ news.get_datetime|date:'Y-m-d' }}</div>
 {% if is_admin %}
+<div class='news-page-uploadpic'>
 <form enctype="multipart/form-data" action="/news/{{ news.get_id }}/" method="POST">
     {% csrf_token %}
     <table>{{ form.as_table}}
     </table>
     <input type="submit" value="上传图片">
 </form><br>
+</div>
 {% endif %}
-{{ news.get_content|linebreaks }}<br>
+<div class='news-page-content'>{{ news.get_content|linebreaks }}</div>
 {% for p in picture %}
-    <div><img src='{{ p }}'></div>
+    <div class='news-page-pic'><img src='{{ p }}'></div>
 {% endfor %}
+</div>
+{% endblock %}
