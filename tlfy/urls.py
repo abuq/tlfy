@@ -34,18 +34,23 @@ urlpatterns = patterns('',
     url(r'^law/all/$', 'news.views.all_law'),
     url(r'^create_train/$', 'news.views.create_train'),
     url(r'^train/all/$', 'news.views.all_train'),
+    url(r'^delete_news/(?P<nid>\d+)/$', 'news.views.delete_news'),
 
     url(r'^message/write/$', 'message.views.write_page'),
     url(r'^message/(?P<mid>\d+)/$', 'message.views.message_page'),
+    url(r'^delete_message/(?P<mid>\d+)/$', 'message.views.delete_message'),
     url(r'^message/inbox/$', 'message.views.inbox'),
     #url(r'^message/set_read/(?P<mid>\d+)/$', 'message.views.set_read'),
     #url(r'^message/delete/(?P<mid>\d+)/$', 'message.views.delete'),
 
     url(r'^create_notice/$', 'notice.views.create_notice'),
     url(r'^notice/all/$', 'notice.views.all_notice'),
+    url(r'^delete_notice/(?P<nid>\d+)/$', 'notice.views.delete_notice'),
 
     url(r'^create_doc_example/$', 'doc_example.views.create_doc_example'),
     url(r'^doc_example/all/$', 'doc_example.views.all_doc_example'),
+    url(r'^delete_doc_example/(?P<did>\d+)/$',
+            'doc_example.views.delete_doc_example'),
 
 	url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root':media}),
 )

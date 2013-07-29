@@ -2,7 +2,11 @@
 {% block content %}
 <div class='news-page-outline'>
 <div class='news-page-title'>{{ news.get_title }}</div>
-<div class='news-page-datetime'>{{ news.get_datetime|date:'Y-m-d' }}</div>
+<div class='news-page-datetime'>{{ news.get_datetime|date:'Y-m-d' }}
+{% if is_superadmin %}
+    <a href='/delete_news/{{ nid }}'>删除本文</a>
+{% endif %}
+</div>
 {% if is_admin %}
 <div class='news-page-uploadpic'>
 <form enctype="multipart/form-data" action="/news/{{ news.get_id }}/" method="POST">

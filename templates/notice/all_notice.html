@@ -2,7 +2,11 @@
 {% block content %}
 <div class='news-page-outline'>
 {% for n in notice%}
-    <li>{{ n.get_content }} ({{ n.get_datetime|date:'Y-m-d' }})</li><br>
+    <li>{{ n.get_content }} ({{ n.get_datetime|date:'Y-m-d' }})</li>
+    {% if is_superadmin %}
+        <a href='/delete_notice/{{ n.get_id }}/'>删除本条公告</a>
+    {% endif %}
+    <br>
 {% endfor %}
 <div class="pagination">
     <span class="step-links">

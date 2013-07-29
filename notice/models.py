@@ -8,6 +8,9 @@ class Notice(models.Model):
     def __unicode__(self):
         return u'%s' % (self.content)
 
+    def get_id(self):
+        return self.id
+
     def get_content(self):
         return self.content
 

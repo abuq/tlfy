@@ -2,7 +2,11 @@
 {% block content %}
 <div class='news-page-outline'>
 {% for d in doc_example%}
-    <li>{{ d.get_title }}.<a href='/media/{{ d.doc.url }}'>下载</a></li>
+    <li>{{ d.get_title }}.<a href='/media/{{ d.doc.url }}'>下载</a>
+    {% if is_superadmin %}
+        <a href='/delete_doc_example/{{ d.get_id }}/'>删除</a>
+    {% endif %}
+    </li>
 {% endfor %}
 <div class="pagination">
     <span class="step-links">

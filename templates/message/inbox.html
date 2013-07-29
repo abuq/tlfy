@@ -4,7 +4,9 @@
 <div class='news-page-outline'>
 已收到的站内信:<br>
 {% for m in msg%}
-    <li><a href='/message/{{ m.get_id }}/'>{{ m.get_title }}</a></li>
+    <li><a href='/message/{{ m.get_id }}/'>{{ m.get_title }}</a>
+    <a href='/delete_message/{{ m.get_id }}/'>删除</a>
+    </li>
 {% endfor %}
 <div class="pagination">
     <span class="step-links">

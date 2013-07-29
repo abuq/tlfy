@@ -8,7 +8,9 @@ from doc_example.forms import *
 from user_profile.models import UserProfile
 from doc_example.models import DocExample
 from doc_example.forms import *
+from lib_tlfy.globals import *
 import datetime
+import os
 
 def create_doc_example(request):
     user = request.user
@@ -43,6 +45,7 @@ def create_doc_example(request):
 
 def all_doc_example(request):
     logged_in = False
+    is_superadmin = False
 
     user = request.user
     userp = None
@@ -54,6 +57,8 @@ def all_doc_example(request):
         return HttpResponseRedirect('/')
     else:
         logged_in = True
+        if userp.is_superadmin():
+            is_superadmin = True
 
     all_doc_example = DocExample.objects.all()
     paginator = Paginator(all_doc_example, 10) 
@@ -68,4 +73,25 @@ def all_doc_example(request):
 
     return render_to_response('doc_example/all_doc_example.html',
             RequestContext(request, locals()))
+
+def delete_doc_example(request, did):
+    user = request.user
+    userp = None
+    try:
+        userp = UserProfile.objects.get(user = user)
+    except:
+        pass
+    if not userp:
+        return HttpResponseRedirect('/')
+    elif not userp.is_superadmin():
+        return HttpResponseRedirect('/')
+
+    de = DocExample.objects.get(id = int(did))
+    print ROOT + '/media/' + de.doc.url
+    if os.path.isfile(ROOT + '/media/' + de.doc.url):
+        os.remove(ROOT + '/media/' + de.doc.url)
+    else:
+        pass
+    de.delete()
+    return HttpResponseRedirect('/doc_example/all/')
 

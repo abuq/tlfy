@@ -40,6 +40,7 @@ def create_notice(request):
 
 def all_notice(request):
     logged_in = False
+    is_superadmin = False
 
     user = request.user
     userp = None
@@ -51,6 +52,8 @@ def all_notice(request):
         return HttpResponseRedirect('/')
     else:
         logged_in = True
+        if userp.is_superadmin():
+            is_superadmin = True
 
     notice_all = Notice.objects.all().order_by('-datetime')
     paginator = Paginator(notice_all, 10)
@@ -66,4 +69,19 @@ def all_notice(request):
     return render_to_response('notice/all_notice.html',
             RequestContext(request, locals()))
 
-    
+def delete_notice(request, nid):
+    user = request.user
+    userp = None
+    try:
+        userp = UserProfile.objects.get(user = user)
+    except:
+        pass
+    if not userp:
+        return HttpResponseRedirect('/')
+    elif not userp.is_superadmin():
+        return HttpResponseRedirect('/')
+
+    notice = Notice.objects.get(id = int(nid))
+    notice.delete()
+
+    return HttpResponseRedirect('/notice/all/')

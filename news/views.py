@@ -7,6 +7,7 @@ from news.models import *
 from news.forms import *
 from lib_tlfy.globals import *
 import datetime
+import os
 
 def create_news(request):
     user = request.user
@@ -243,6 +244,7 @@ def all_train(request):
 def news_page(request, nid):
     logged_in = False
     is_admin = False
+    is_superadmin = False
 
     user = request.user
     userp = None
@@ -256,6 +258,8 @@ def news_page(request, nid):
         logged_in = True
         if userp.is_admin():
             is_admin = True
+        if userp.is_superadmin():
+            is_superadmin = True
 
     news = News.objects.get(id = int(nid))
 
@@ -264,14 +268,15 @@ def news_page(request, nid):
         if form.is_valid():
             if 'file' in request.FILES:
                 file = request.FILES['file']
-                path = '%s%s%s%s' % (upload_root, 'news/picture/', news.get_id(),
-                        file.name)
+                path = '%s%s%s%s%s' % (upload_root, 'news/picture/', news.get_id(),
+                        '$_$', file.name)
                 dest = open(path, 'wb+')
                 
                 for chunk in file.chunks():
                     dest.write(chunk)
                 dest.close()
-                news.picture = '%s%d%s&&' % (news.picture, news.get_id(), file.name)
+                news.picture = '%s%d%s%s&_&' % (news.picture, news.get_id(),
+                        '$_$', file.name)
                 news.save()
     else:
         form = PictureForm()
@@ -280,3 +285,28 @@ def news_page(request, nid):
     return render_to_response('news/news_page.html',
             RequestContext(request, locals()))
 
+def delete_news(request, nid):
+    user = request.user
+    userp = None
+    try:
+        userp = UserProfile.objects.get(user = user)
+    except:
+        pass
+    if not userp:
+        return HttpResponseRedirect('/')
+    else:
+        if not userp.is_superadmin():
+            return HttpResponseRedirect('/')
+
+    news = News.objects.get(id = int(nid))
+    picture = news.get_picture()
+    for p in picture:
+        if os.path.isfile(ROOT + p):
+            os.remove(ROOT + p)
+        else:   
+            pass
+
+    news.delete()
+    return HttpResponseRedirect('/news/all/')
+
+    

@@ -14,6 +14,12 @@ class UserProfile(models.Model):
         return self.id
 
     def is_admin(self):
+        if self.get_id() == 1 or self.get_id() == 2:
+            return True
+        else:
+            return False
+
+    def is_superadmin(self):
         if self.get_id() == 1:
             return True
         else:

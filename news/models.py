@@ -29,7 +29,7 @@ class News(models.Model):
         return self.datetime
 
     def get_picture(self):
-        pic = self.picture.split('&&')
+        pic = self.picture.split('&_&')
         print pic
         picture = []
         for p in pic:

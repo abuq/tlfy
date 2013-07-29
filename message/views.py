@@ -34,7 +34,7 @@ def write_page(request):
     return render_to_response('message/write_message.html', RequestContext(request,
                 locals()))
 
-def inbox(request):    
+def inbox(request): 
     logged_in = False;
 
     user = request.user
@@ -78,7 +78,7 @@ def message_page(request, mid):
     return render_to_response('message/message_page.html', RequestContext(request,
                 locals()))
 
-def set_read(request, mid):
+def delete_message(request, mid):
     user = request.user
     userp = None
     try:
@@ -86,28 +86,11 @@ def set_read(request, mid):
     except:
         pass
     if not userp:
-        return HttpResponseRedirect('/accounts/login')
+        return HttpResponseRedirect('/')
 
     msg = Message.objects.get(id = int(mid))
     if msg.get_receiver() != userp:
-        return HttpResponseRedirect('/accounts/user_page/')
-
-    msg.already_read()
-    return HttpResponseRedirect('/message/inbox/')
-
-def delete(request, mid):
-    user = request.user
-    userp = None
-    try:
-        userp = UserProfile.objects.get(user = user)
-    except:
-        pass
-    if not userp:
-        return HttpResponseRedirect('/accounts/login')
-
-    msg = Message.objects.get(id = int(mid))
-    if msg.get_receiver() != userp:
-        return HttpResponseRedirect('/accounts/user_page/')
+        return HttpResponseRedirect('/')
 
     msg.delete()
     return HttpResponseRedirect('/message/inbox/')
