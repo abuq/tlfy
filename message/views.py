@@ -48,7 +48,7 @@ def inbox(request):
     else:
         logged_in = True
 
-    msg_all = userp.received_msg.all()
+    msg_all = userp.received_msg.all().order_by('-datetime')
     paginator = Paginator(msg_all, 10);
     page = request.GET.get('page')
     try:

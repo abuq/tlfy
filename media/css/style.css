@@ -335,10 +335,12 @@ body {
 
 .news-page-outline {
     position:relative;
-    width:100%;
+    width:85%;
+    padding-left:7.5%;
     min-height:300px;
     float:left;
     text-align:center;
+    word-wrap:break-word;
 }
 
 .news-page-title {

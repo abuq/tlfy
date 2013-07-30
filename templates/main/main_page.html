@@ -9,7 +9,7 @@
 <div class='main_grid_more'><a href='/intro/all/'>更多>></a></div>
 </div>
 {% for i in intro %}
-<div class='main_grid_content'><a href='/news/{{i.get_id}}/'>{{i.get_title}}</a>
+<div class='main_grid_content'><a href='/news/{{i.get_id}}/'>{{i.get_title|truncatechars:23}}</a>
 <div class='main_grid_datetime'>{{ i.get_datetime|date:'Y-m-d' }}</div>
 </div>
 {% endfor %}
@@ -22,7 +22,7 @@
 <div class='main_grid_more'><a href='/news/all/'>更多>></a></div>
 </div>
 {% for n in news %}
-<div class='main_grid_content'><a href='/news/{{n.get_id}}/'>{{n.get_title}}</a>
+<div class='main_grid_content'><a href='/news/{{n.get_id}}/'>{{n.get_title|truncatechars:23}}</a>
 <div class='main_grid_datetime'>{{ n.get_datetime|date:'Y-m-d' }}</div>
 </div>
 {% endfor %}
@@ -35,7 +35,7 @@
 <div class='main_grid_more'><a href='/law/all/'>更多>></a></div>
 </div>
 {% for l in law %}
-<div class='main_grid_content'><a href='/news/{{ l.get_id }}/'>{{l.get_title}}</a>
+<div class='main_grid_content'><a href='/news/{{ l.get_id }}/'>{{l.get_title|truncatechars:23}}</a>
 <div class='main_grid_datetime'>{{ l.get_datetime|date:'Y-m-d' }}</div>
 </div>
 {% endfor %}
@@ -48,7 +48,7 @@
 <div class='main_grid_more'><a href='/train/all/'>更多>></a></div>
 </div>
 {% for t in train %}
-<div class='main_grid_content'><a href='/news/{{ t.get_id }}/'>{{t.get_title}}</a>
+<div class='main_grid_content'><a href='/news/{{ t.get_id }}/'>{{t.get_title|truncatechars:23}}</a>
 <div class='main_grid_datetime'>{{ t.get_datetime|date:'Y-m-d' }}</div>
 </div>
 {% endfor %}
@@ -61,10 +61,12 @@
 <div class='main_grid_more'><a href='/notice/all/'>更多>></a></div>
 </div>
 {% if logged_in %}
-{{ notice_new.get_content }}({{ notice_new.get_datetime|date:'Y-m-d' }})
+<div style='width:95%;margin-left:5px;text-align:left;word-wrap:break-word;'>
+{{ notice_new.get_content }}(发布时间：{{ notice_new.get_datetime|date:'Y-m-d' }})
 {% else %}
 登录后方可查看
 {% endif %}
+</div>
 </div>
 <div class='main_grid'>
 <div class='main_grid_title'>文书样式
@@ -75,7 +77,7 @@
 </div>
 {% if logged_in %}
     {% for d in doc_example %}
-        <div class='main_grid_content'>{{ d.get_title }}.<a href='/media/{{ d.doc.url }}'>下载</a></div>
+        <div class='main_grid_content'>{{ d.get_title|truncatechars:23 }}.<a href='/media/{{ d.doc.url }}'>下载</a></div>
     {% endfor %}
 {% else %}
 登录后方可查看
