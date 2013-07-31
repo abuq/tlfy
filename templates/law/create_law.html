@@ -1,4 +1,4 @@
-<form action="/create_law/" method="POST">
+<form enctype="multipart/form-data" action="/create_law/" method="POST">
     {% csrf_token %}
     <table>{{ form.as_table}}
     </table>

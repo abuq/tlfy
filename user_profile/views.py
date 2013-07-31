@@ -11,10 +11,20 @@ from user_profile.forms import *
 from lib_tlfy.globals import *
 
 def create_users(request):
-    user = User.objects.create(username = 'tlfy', password = '1', is_active = True)
+    user = User.objects.create(username = 'superadmin', password = '1', is_active = True)
+    user.set_password('1')
+    user.save()
+    userp = UserProfile.objects.create(user = user, name = '超级管理员')
+
+    user = User.objects.create(username = 'admin', password = '1', is_active = True)
     user.set_password('1')
     user.save()
     userp = UserProfile.objects.create(user = user, name = '管理员')
+
+    user = User.objects.create(username = 'tlfy', password = '1', is_active = True)
+    user.set_password('1')
+    user.save()
+    userp = UserProfile.objects.create(user = user, name = '田林法院')
 
     user = User.objects.create(username = 'gaj', password = '1', is_active = True)
     user.set_password('1')

@@ -34,13 +34,13 @@ def main_page(request):
 
     news = News.objects.all().filter(type = 0).order_by('-datetime')[0:9]
     intro = News.objects.all().filter(type = 1).order_by('-datetime')[0:9]
-    law = News.objects.all().filter(type = 2).order_by('-datetime')[0:9]
     train = News.objects.all().filter(type = 3).order_by('-datetime')[0:9]
     try:
         notice_new = Notice.objects.all().order_by('-datetime')[0]
     except:
         pass
-    doc_example = DocExample.objects.all()[0:5]
+    doc_example = DocExample.objects.filter(type = 0)[0:9]
+    law = DocExample.objects.filter(type = 1)[0:9]
 
     return render_to_response('main/main_page.html', RequestContext(request, locals()))
 

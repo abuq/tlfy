@@ -3,7 +3,7 @@ from django.db import models
 from user_profile.models import UserProfile
 
 class News(models.Model):
-    #0:news.1:intro.2:law.3:train.
+    #0:news.1:intro.3:train.
     type = models.IntegerField(default = 0)
     title = models.CharField(max_length = 100)
     content = models.TextField()

@@ -35,20 +35,19 @@
 <div class='main_grid_more'><a href='/law/all/'>更多>></a></div>
 </div>
 {% for l in law %}
-<div class='main_grid_content'><a href='/news/{{ l.get_id }}/'>{{l.get_title|truncatechars:23}}</a>
-<div class='main_grid_datetime'>{{ l.get_datetime|date:'Y-m-d' }}</div>
+<div class='main_grid_content'>{{ l.get_title|truncatechars:23 }}.<a href='/media/{{ l.doc.url }}/'>下载</a>
 </div>
 {% endfor %}
 </div>
 <div class='main_grid'>
 <div class='main_grid_title'>业务培训
 {% if is_admin %}
-<a href='create_law/'>添加培训</a>
+<a href='create_train/'>添加培训</a>
 {% endif %}
 <div class='main_grid_more'><a href='/train/all/'>更多>></a></div>
 </div>
 {% for t in train %}
-<div class='main_grid_content'><a href='/news/{{ t.get_id }}/'>{{t.get_title|truncatechars:23}}</a>
+<div class='main_grid_content'><a href='/news/{{t.get_id}}/'>{{t.get_title|truncatechars:23}}</a>
 <div class='main_grid_datetime'>{{ t.get_datetime|date:'Y-m-d' }}</div>
 </div>
 {% endfor %}

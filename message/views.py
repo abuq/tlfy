@@ -18,12 +18,13 @@ def write_page(request):
         return HttpResponseRedirect('/')
 
     if request.method == 'POST':
+        #form = SendMessageForm(request.POST, request.FILES)
         form = SendMessageForm(request.POST)
         if form.is_valid():
             title = form.cleaned_data['title']
             content = form.cleaned_data['content']
             receivers = form.cleaned_data['receivers']
-            print receivers
+            #docfile = request.FILES['docfile']
 
             for r in receivers:
                 receiver = UserProfile.objects.get(id = int(r))

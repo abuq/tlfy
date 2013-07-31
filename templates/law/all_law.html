@@ -1,11 +1,12 @@
 {% extends "main/base.html" %}
 {% block content %}
 <div class='news-page-outline'>
-{% for l in law%}
-<div class='all-news-iterm'>
-    <div class='all-news-iterm-title'><a href='/news/{{ l.get_id }}/'>{{ l.get_title }}</a></div>
-    <div class='all-news-iterm-datetime'>{{ l.get_datetime|date:'Y-m-d' }}</div>
-</div>
+{% for d in law%}
+    <li>{{ d.get_title }}.<a href='/media/{{ d.doc.url }}'>下载</a>
+    {% if is_superadmin %}
+        <a href='/delete_doc_example/{{ d.get_id }}/'>删除</a>
+    {% endif %}
+    </li>
 {% endfor %}
 <div class="pagination">
     <span class="step-links">

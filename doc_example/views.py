@@ -60,7 +60,7 @@ def all_doc_example(request):
         if userp.is_superadmin():
             is_superadmin = True
 
-    all_doc_example = DocExample.objects.all()
+    all_doc_example = DocExample.objects.filter(type = 0)
     paginator = Paginator(all_doc_example, 10) 
 
     page = request.GET.get('page')
@@ -72,6 +72,68 @@ def all_doc_example(request):
         doc_example = paginator.page(paginator.num_pages)
 
     return render_to_response('doc_example/all_doc_example.html',
+            RequestContext(request, locals()))
+
+def create_law(request):
+    user = request.user
+    userp = None
+    try:
+        userp = UserProfile.objects.get(user = user)
+    except:
+        pass
+    if not userp:
+        return HttpResponseRedirect('/')
+    if not userp.is_admin():
+        return HttpResponseRedirect('/')
+
+    error = list()
+    if request.method == 'POST':
+        form = DocExampleForm(request.POST, request.FILES)
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            docfile = request.FILES['docfile']
+
+            if len(error) == 0:
+                doc_example = DocExample.objects.create(title = title, doc =\
+                        docfile, type = 1)
+                doc_example.save()
+                return HttpResponseRedirect('/')
+
+    else:
+        form = DocExampleForm()
+
+    return render_to_response('law/create_law.html',
+            RequestContext(request, locals()))
+
+def all_law(request):
+    logged_in = False
+    is_superadmin = False
+
+    user = request.user
+    userp = None
+    try:
+        userp = UserProfile.objects.get(user = user)
+    except:
+        pass
+    if not userp:
+        return HttpResponseRedirect('/')
+    else:
+        logged_in = True
+        if userp.is_superadmin():
+            is_superadmin = True
+
+    all_law = DocExample.objects.all().filter(type = 1)
+    paginator = Paginator(all_law, 10) 
+
+    page = request.GET.get('page')
+    try:
+        law = paginator.page(page)
+    except PageNotAnInteger:
+        law = paginator.page(1)
+    except EmptyPage:
+        law = paginator.page(paginator.num_pages)
+
+    return render_to_response('law/all_law.html',
             RequestContext(request, locals()))
 
 def delete_doc_example(request, did):

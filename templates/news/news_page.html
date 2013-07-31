@@ -17,9 +17,9 @@
 </form><br>
 </div>
 {% endif %}
-<div class='news-page-content'>{{ news.get_content|linebreaks }}</div>
+<div class='news-page-content'>{{ news.get_content|safe }}</div>
 {% for p in picture %}
-    <div class='news-page-pic'><img src='{{ p }}'></div>
+    <div class='news-page-pic'><img width='100%' src='{{ p }}'></div>
 {% endfor %}
 </div>
 {% endblock %}

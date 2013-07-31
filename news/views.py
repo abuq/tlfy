@@ -28,6 +28,11 @@ def create_news(request):
             title = form.cleaned_data['title']
             content = form.cleaned_data['content']
 
+            print content
+            content = content.replace(' ', '&nbsp;')
+            content = content.replace('\r\n', '<br \>')
+            content = content.replace('\n', '<br \>')
+
             if len(error) == 0:
                 news = News.objects.create(title = title, content = content,
                         datetime = datetime.datetime.now())
@@ -69,37 +74,6 @@ def create_intro(request):
         form = NewsForm()
 
     return render_to_response('intro/create_intro.html',
-            RequestContext(request, locals()))
-
-def create_law(request):
-    user = request.user
-    userp = None
-    try:
-        userp = UserProfile.objects.get(user = user)
-    except:
-        pass
-    if not userp:
-        return HttpResponseRedirect('/')
-    if not userp.is_admin():
-        return HttpResponseRedirect('/')
-
-    error = list()
-    if request.method == 'POST':
-        form = NewsForm(request.POST)
-        if form.is_valid():
-            title = form.cleaned_data['title']
-            content = form.cleaned_data['content']
-
-            if len(error) == 0:
-                news = News.objects.create(title = title, content = content,
-                        datetime = datetime.datetime.now(), type = 2)
-                news.save()
-                return HttpResponseRedirect('/')
-
-    else:
-        form = NewsForm()
-
-    return render_to_response('law/create_law.html',
             RequestContext(request, locals()))
 
 def create_train(request):
@@ -185,33 +159,6 @@ def all_intro(request):
         intro = paginator.page(paginator.num_pages)
 
     return render_to_response('intro/all_intro.html',
-            RequestContext(request, locals()))
-
-def all_law(request):
-    logged_in = False
-    user = request.user
-    userp = None
-    try:
-        userp = UserProfile.objects.get(user = user)
-    except:
-        pass
-    if not userp:
-        pass
-    else:
-        logged_in = True
-
-    alaw = News.objects.all().filter(type = 2).order_by('-datetime')
-    paginator = Paginator(alaw, 12) 
-
-    page = request.GET.get('page')
-    try:
-        law = paginator.page(page)
-    except PageNotAnInteger:
-        law = paginator.page(1)
-    except EmptyPage:
-        law = paginator.page(paginator.num_pages)
-
-    return render_to_response('law/all_law.html',
             RequestContext(request, locals()))
 
 def all_train(request):
