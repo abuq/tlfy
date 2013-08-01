@@ -5,3 +5,4 @@ tags
 *.swp
 *.db
 media/upload/
+settings.py
