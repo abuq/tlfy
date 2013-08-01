@@ -28,7 +28,6 @@ def create_news(request):
             title = form.cleaned_data['title']
             content = form.cleaned_data['content']
 
-            print content
             content = content.replace(' ', '&nbsp;')
             content = content.replace('\r\n', '<br \>')
             content = content.replace('\n', '<br \>')
@@ -64,6 +63,10 @@ def create_intro(request):
             title = form.cleaned_data['title']
             content = form.cleaned_data['content']
 
+            content = content.replace(' ', '&nbsp;')
+            content = content.replace('\r\n', '<br \>')
+            content = content.replace('\n', '<br \>')
+
             if len(error) == 0:
                 news = News.objects.create(title = title, content = content,
                         datetime = datetime.datetime.now(), type = 1)
@@ -94,6 +97,10 @@ def create_train(request):
         if form.is_valid():
             title = form.cleaned_data['title']
             content = form.cleaned_data['content']
+
+            content = content.replace(' ', '&nbsp;')
+            content = content.replace('\r\n', '<br \>')
+            content = content.replace('\n', '<br \>')
 
             if len(error) == 0:
                 news = News.objects.create(title = title, content = content,
