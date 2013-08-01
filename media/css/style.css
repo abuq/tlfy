@@ -277,8 +277,9 @@ body {
     width:100%;
     position:relative;
     float:left;
-    margin-top:-20px;
+    margin-top:0px;
     z-index:1;
+    background-color:#00aed1;
 }
 
 .main_grid_outline {
@@ -286,8 +287,8 @@ body {
 }
 
 .main_grid {
-    width:48.5%;
-    height:200px;
+    width:47.7%;
+    height:220px;
     float:left;
     margin-top:10px;
     margin-left:5px;
@@ -310,19 +311,12 @@ body {
     border-color:#00aed1;
 }
 
-.main_grid_more {
-    font-size:15px;
-    float:right;
-    text-align:right;
-    width:50%;
-    padding-right:5px;
-}
-
 .main_grid_content {
     width:100%;
     margin-top:3px;
     margin-bottom:3px;
     padding-left:5px;
+    height:18px;
 }
 
 .main_grid_datetime {
@@ -331,6 +325,13 @@ body {
     float:right;
     margin-right:5px;
     padding-right:5px;
+}
+
+.main_grid_notice {
+    width:95%;
+    margin-left:5px;
+    text-align:left;
+    word-wrap:break-word;
 }
 
 .news-page-outline {
@@ -391,9 +392,9 @@ body {
 .all-news-iterm-title {
     position:relative;
     float:left;
-    width:50%;
+    width:80%;
     text-align:left;
-    margin-left:150px;
+    margin-left:100px;
 }
 
 .all-news-iterm-datetime {

@@ -3,8 +3,8 @@
 <div class='news-page-outline'>
 {% for i in intro %}
 <div class='all-news-iterm'>
-    <div class='all-news-iterm-title'><a href='/news/{{ i.get_id }}/'>{{ i.get_title }}</a></div>
-    <div class='all-news-iterm-datetime'>{{ i.get_datetime|date:'Y-m-d' }}</div>
+    <div class='all-news-iterm-title'><a href='/news/{{ i.get_id }}/'>{{ i.get_title }}</a>
+    (发布日期：{{ i.get_datetime|date:'Y-m-d' }})</div>
 </div>
 {% endfor %}
 <div class="pagination">
