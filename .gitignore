@@ -5,4 +5,4 @@ tags
 *.swp
 *.db
 media/upload/
-settings.py
+tlfy/settings.py
