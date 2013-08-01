@@ -6,11 +6,12 @@
 {% if is_admin %}
 <a href='create_intro/'>添加简介</a>
 {% endif %}
-<div class='main_grid_more'><a href='/intro/all/'>更多>></a></div>
+<a href='/intro/all/'>更多>></a>
 </div>
 {% for i in intro %}
-<div class='main_grid_content'><a href='/news/{{i.get_id}}/'>{{i.get_title|truncatechars:23}}</a>
+<div class='main_grid_content'>
 <div class='main_grid_datetime'>{{ i.get_datetime|date:'Y-m-d' }}</div>
+<a href='/news/{{i.get_id}}/'>{{i.get_title|truncatechars:23}}</a>
 </div>
 {% endfor %}
 </div>
@@ -19,11 +20,12 @@
 {% if is_admin %}
 <a href='create_news/'>添加新闻</a>
 {% endif %}
-<div class='main_grid_more'><a href='/news/all/'>更多>></a></div>
+<a href='/news/all/'>更多>></a>
 </div>
 {% for n in news %}
-<div class='main_grid_content'><a href='/news/{{n.get_id}}/'>{{n.get_title|truncatechars:23}}</a>
+<div class='main_grid_content'>
 <div class='main_grid_datetime'>{{ n.get_datetime|date:'Y-m-d' }}</div>
+<a href='/news/{{n.get_id}}/'>{{n.get_title|truncatechars:23}}</a>
 </div>
 {% endfor %}
 </div>
@@ -32,7 +34,7 @@
 {% if is_admin %}
 <a href='create_law/'>添加法律</a>
 {% endif %}
-<div class='main_grid_more'><a href='/law/all/'>更多>></a></div>
+<a href='/law/all/'>更多>></a>
 </div>
 {% for l in law %}
 <div class='main_grid_content'>{{ l.get_title|truncatechars:23 }}.<a href='/media/{{ l.doc.url }}/'>下载</a>
@@ -44,11 +46,12 @@
 {% if is_admin %}
 <a href='create_train/'>添加培训</a>
 {% endif %}
-<div class='main_grid_more'><a href='/train/all/'>更多>></a></div>
+<a href='/train/all/'>更多>></a>
 </div>
 {% for t in train %}
-<div class='main_grid_content'><a href='/news/{{t.get_id}}/'>{{t.get_title|truncatechars:23}}</a>
+<div class='main_grid_content'>
 <div class='main_grid_datetime'>{{ t.get_datetime|date:'Y-m-d' }}</div>
+<a href='/news/{{t.get_id}}/'>{{t.get_title|truncatechars:23}}</a>
 </div>
 {% endfor %}
 </div>
@@ -57,10 +60,10 @@
 {% if is_admin %}
 <a href='create_notice/'>添加公告</a>
 {% endif %}
-<div class='main_grid_more'><a href='/notice/all/'>更多>></a></div>
+<a href='/notice/all/'>更多>></a>
 </div>
+<div class='main_grid_notice'>
 {% if logged_in %}
-<div style='width:95%;margin-left:5px;text-align:left;word-wrap:break-word;'>
 {{ notice_new.get_content }}(发布时间：{{ notice_new.get_datetime|date:'Y-m-d' }})
 {% else %}
 登录后方可查看
@@ -72,14 +75,14 @@
 {% if is_admin %}
 <a href='/create_doc_example/'>添加文书样式</a>
 {% endif %}
-<div class='main_grid_more'><a href='/doc_example/all/'>更多>></a></div>
+<a href='/doc_example/all/'>更多>></a>
 </div>
 {% if logged_in %}
     {% for d in doc_example %}
         <div class='main_grid_content'>{{ d.get_title|truncatechars:23 }}.<a href='/media/{{ d.doc.url }}'>下载</a></div>
     {% endfor %}
 {% else %}
-登录后方可查看
+        <div class='main_grid_content'>登录后方可查看</div>
 {% endif %}
 </div>
 </div>

@@ -116,7 +116,7 @@ def all_law(request):
     except:
         pass
     if not userp:
-        return HttpResponseRedirect('/')
+        pass
     else:
         logged_in = True
         if userp.is_superadmin():
