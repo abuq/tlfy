@@ -261,6 +261,6 @@ def delete_news(request, nid):
             pass
 
     news.delete()
-    return HttpResponseRedirect('/news/all/')
+    return HttpResponseRedirect('/')
 
     
