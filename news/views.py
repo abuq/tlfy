@@ -28,7 +28,6 @@ def create_news(request):
             title = form.cleaned_data['title']
             content = form.cleaned_data['content']
 
-            print content
             content = content.replace(' ', '&nbsp;')
             content = content.replace('\r\n', '<br \>')
             content = content.replace('\n', '<br \>')

@@ -1,0 +1,13 @@
+<uwsgi>
+ <socket>127.0.0.1:8080</socket>
+ <listen>80</listen>
+ <master>true</master>
+ <pythonpath>/root/tlfy/</pythonpath>
+ <module>django_uwsgi</module>
+ <wsgi-file>/root/tlfy/tlfy/wsgi.py</wsgi-file>
+ <processes>8</processes>
+ <logdate>true</logdate>
+ <daemonize>/var/log/uwsgi/uwsgi.log</daemonize>
+ <plugins>python</plugins>
+</uwsgi>
+
