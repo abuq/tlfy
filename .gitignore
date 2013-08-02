@@ -6,3 +6,4 @@ tags
 *.db
 media/upload/
 settings.py
+!pic_header.png
