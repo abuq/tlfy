@@ -5,4 +5,5 @@ tags
 *.swp
 *.db
 media/upload/
-tlfy/settings.py
+settings.py
+!pic_header.png
