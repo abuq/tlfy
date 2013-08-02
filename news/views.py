@@ -8,6 +8,7 @@ from news.forms import *
 from lib_tlfy.globals import *
 import datetime
 import os
+import Image
 
 def create_news(request):
     user = request.user
@@ -229,6 +230,16 @@ def news_page(request, nid):
                 for chunk in file.chunks():
                     dest.write(chunk)
                 dest.close()
+
+                #resize begin
+                im = Image.open(path)
+                w = im.size[0]
+                h = im.size[1]
+                ratio = float(700)/float(w)
+                print 'ratio = ' + str(ratio)
+                newh = h * ratio
+                im.resize((700, int(newh)), Image.ANTIALIAS).save(path, quality = 95)
+                #resize end
                 news.picture = '%s%d%s%s&_&' % (news.picture, news.get_id(),
                         '$_$', file.name)
                 news.save()
