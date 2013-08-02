@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 from os.path import dirname, join
+import settings
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -52,5 +53,6 @@ urlpatterns = patterns('',
     url(r'^delete_doc_example/(?P<did>\d+)/$',
             'doc_example.views.delete_doc_example'),
 
-	url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root':media}),
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root':media}),
+    url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root':settings.STATIC_ROOT}),
 )

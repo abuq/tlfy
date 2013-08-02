@@ -26,12 +26,6 @@ def main_page(request):
 
     form = LoginForm()
 
-    site_start = False
-    try:
-        userpp = UserProfile.objects.get(id = 1)
-    except:
-        site_start = True
-
     news = News.objects.all().filter(type = 0).order_by('-datetime')[0:9]
     intro = News.objects.all().filter(type = 1).order_by('-datetime')[0:9]
     train = News.objects.all().filter(type = 3).order_by('-datetime')[0:9]

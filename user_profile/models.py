@@ -14,13 +14,13 @@ class UserProfile(models.Model):
         return self.id
 
     def is_admin(self):
-        if self.get_id() == 1 or self.get_id() == 2:
+        if self.user.username == 'superadmin' or self.user.username == 'admin':
             return True
         else:
             return False
 
     def is_superadmin(self):
-        if self.get_id() == 1:
+        if self.user.username == 'superadmin':
             return True
         else:
             return False
