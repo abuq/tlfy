@@ -4,12 +4,14 @@ from user_profile.models import UserProfile
 import datetime
 
 class MessageManager(models.Manager):
-    def send_msg(self, sender, receiver, title, content):
+    def send_msg(self, sender, receiver, title, content, num_file, file_url):
         msg = self.create(
                 sender = sender,
                 receiver = receiver,
                 title = title,
                 content = content,
+                num_file = num_file,
+                file_url = file_url,
                 status = 0,
                 datetime = datetime.datetime.now(),
                 )
@@ -23,6 +25,8 @@ class Message(models.Model):
     content = models.CharField(max_length = 1000)
     status = models.IntegerField(default = 0)#0:intact,1:read.
     datetime = models.DateTimeField()
+    num_file = models.IntegerField(default = 0)
+    file_url = models.URLField(blank = True)
 
     objects = MessageManager()
 
@@ -40,6 +44,16 @@ class Message(models.Model):
 
     def get_content(self):
         return self.content
+
+    def get_num_file(self):
+        return self.num_file
+
+    def minus_num_file(self, num):
+        self.num_file -= num
+        return self.num_file
+
+    def get_file_url(self):
+        return self.file_url
 
     def get_status(self):
         return self.status

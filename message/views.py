@@ -6,6 +6,8 @@ from message.models import Message
 from user_profile.models import UserProfile
 from message.forms import SendMessageForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from lib_tlfy.globals import *
+import os
 
 def write_page(request):
     user = request.user
@@ -18,17 +20,25 @@ def write_page(request):
         return HttpResponseRedirect('/')
 
     if request.method == 'POST':
-        #form = SendMessageForm(request.POST, request.FILES)
-        form = SendMessageForm(request.POST)
+        form = SendMessageForm(request.POST, request.FILES)
+        #form = SendMessageForm(request.POST)
         if form.is_valid():
             title = form.cleaned_data['title']
             content = form.cleaned_data['content']
             receivers = form.cleaned_data['receivers']
-            #docfile = request.FILES['docfile']
+            file = request.FILES['file']
+            path = '%s%s%s' % (upload_root, 'message/', file.name)
+            #print path
+            dest = open(path, 'wb+')
+            for chunk in file.chunks():
+                dest.write(chunk)
+            dest.close()
+            #print 'len(receivers):' + str(len(receivers))
 
             for r in receivers:
                 receiver = UserProfile.objects.get(id = int(r))
-                Message.objects.send_msg(userp, receiver, title, content)
+                Message.objects.send_msg(userp, receiver, title, content,
+                        len(receivers), 'upload/message/%s' % (file.name))
             return HttpResponseRedirect('/message/inbox/')
     else:
         form = SendMessageForm()
@@ -92,6 +102,17 @@ def delete_message(request, mid):
     msg = Message.objects.get(id = int(mid))
     if msg.get_receiver() != userp:
         return HttpResponseRedirect('/')
+
+    if msg.get_num_file() == 1:
+        if os.path.isfile(ROOT + '/media/' + msg.get_file_url()):
+            os.remove(ROOT + '/media/' + msg.get_file_url())
+        else:
+            pass
+    else:
+        amsg = Message.objects.all().filter(file_url = msg.get_file_url())
+        for m in amsg:
+            m.minus_num_file(1)
+            m.save()
 
     msg.delete()
     return HttpResponseRedirect('/message/inbox/')

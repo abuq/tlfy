@@ -11,6 +11,6 @@ class SendMessageForm(forms.Form):
                 '收信人', required = True, widget = CheckboxSelectMultiple)
     title = forms.CharField(max_length = 50, label = '标题')
     content = forms.CharField(max_length = 100000, widget = forms.Textarea, label = '内容')
-    #docfile = forms.FileField(label = '选择一个附件', help_text =
-    #        '文件应小于20M', required = False)
+    file = forms.FileField(label = '选择一个附件', help_text =
+            '文件应小于20M', required = False)
 
