@@ -11,7 +11,7 @@
 {% for i in intro %}
 <div class='main_grid_content'>
 <div class='main_grid_datetime'>{{ i.get_datetime|date:'Y-m-d' }}</div>
-<a href='/news/{{i.get_id}}/'>{{i.get_title|truncatechars:23}}</a>
+<a href='/news/{{i.get_id}}/'>{{i.get_title|truncatechars:20}}</a>
 </div>
 {% endfor %}
 </div>
@@ -25,7 +25,7 @@
 {% for n in news %}
 <div class='main_grid_content'>
 <div class='main_grid_datetime'>{{ n.get_datetime|date:'Y-m-d' }}</div>
-<a href='/news/{{n.get_id}}/'>{{n.get_title|truncatechars:23}}</a>
+<a href='/news/{{n.get_id}}/'>{{n.get_title|truncatechars:20}}</a>
 </div>
 {% endfor %}
 </div>
@@ -37,7 +37,7 @@
 <a href='/law/all/'>更多>></a>
 </div>
 {% for l in law %}
-<div class='main_grid_content'>{{ l.get_title|truncatechars:23 }}.<a href='/media/{{ l.doc.url }}/'>下载</a>
+<div class='main_grid_content'>{{ l.get_title|truncatechars:20 }}.<a href='/media/{{ l.doc.url }}/'>下载</a>
 </div>
 {% endfor %}
 </div>
@@ -51,7 +51,7 @@
 {% for t in train %}
 <div class='main_grid_content'>
 <div class='main_grid_datetime'>{{ t.get_datetime|date:'Y-m-d' }}</div>
-<a href='/news/{{t.get_id}}/'>{{t.get_title|truncatechars:23}}</a>
+<a href='/news/{{t.get_id}}/'>{{t.get_title|truncatechars:20}}</a>
 </div>
 {% endfor %}
 </div>
@@ -79,7 +79,7 @@
 </div>
 {% if logged_in %}
     {% for d in doc_example %}
-        <div class='main_grid_content'>{{ d.get_title|truncatechars:23 }}.<a href='/media/{{ d.doc.url }}'>下载</a></div>
+        <div class='main_grid_content'>{{ d.get_title|truncatechars:20 }}.<a href='/media/{{ d.doc.url }}'>下载</a></div>
     {% endfor %}
 {% else %}
         <div class='main_grid_content'>登录后方可查看</div>
