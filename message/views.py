@@ -26,19 +26,25 @@ def write_page(request):
             title = form.cleaned_data['title']
             content = form.cleaned_data['content']
             receivers = form.cleaned_data['receivers']
-            file = request.FILES['file']
-            path = '%s%s%s' % (upload_root, 'message/', file.name)
-            #print path
-            dest = open(path, 'wb+')
-            for chunk in file.chunks():
-                dest.write(chunk)
-            dest.close()
-            #print 'len(receivers):' + str(len(receivers))
+            try:
+                file = request.FILES['file']
+                path = '%s%s%s' % (upload_root, 'message/', file.name)
+                #print path
+                dest = open(path, 'wb+')
+                for chunk in file.chunks():
+                    dest.write(chunk)
+                dest.close()
+                #print 'len(receivers):' + str(len(receivers))
 
-            for r in receivers:
-                receiver = UserProfile.objects.get(id = int(r))
-                Message.objects.send_msg(userp, receiver, title, content,
-                        len(receivers), 'upload/message/%s' % (file.name))
+                for r in receivers:
+                    receiver = UserProfile.objects.get(id = int(r))
+                    Message.objects.send_msg(userp, receiver, title, content,
+                            len(receivers), 'upload/message/%s' % (file.name))
+            except:
+                for r in receivers:
+                    receiver = UserProfile.objects.get(id = int(r))
+                    Message.objects.send_msg(userp, receiver, title, content,
+                            0, '')
             return HttpResponseRedirect('/message/inbox/')
     else:
         form = SendMessageForm()
@@ -85,6 +91,10 @@ def message_page(request, mid):
     msg = Message.objects.get(id = int(mid))
     if msg.get_receiver().get_id() != userp.get_id():
         return HttpResponseRedirect('/')
+
+    fujian = False
+    if msg.file_url != '':
+        fujian = True
         
     return render_to_response('message/message_page.html', RequestContext(request,
                 locals()))
